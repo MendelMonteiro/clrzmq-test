@@ -23,11 +23,15 @@
             client.Name = "Client";
             server.Name = "Server";
 
+            GC.Collect(2);
+            var collections = GC.CollectionCount(0);
             server.Start();
             client.Start();
 
             server.Join(5000);
             client.Join(5000);
+
+            Console.WriteLine("Collections performed during test {0}", GC.CollectionCount(0) - collections);
         }
 
         private static void ClientThread()

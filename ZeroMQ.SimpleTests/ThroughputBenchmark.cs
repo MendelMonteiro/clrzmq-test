@@ -20,11 +20,15 @@
             var proxyPull = new Thread(ProxyPullThread);
             var proxyPush = new Thread(ProxyPushThread);
 
+            GC.Collect(2);
+            var collections = GC.CollectionCount(0);
             proxyPull.Start();
             proxyPush.Start();
 
             proxyPush.Join();
             proxyPull.Join();
+
+            Console.WriteLine("Collections performed during test {0}", GC.CollectionCount(0) - collections);
         }
 
         private static void ProxyPullThread()
@@ -80,7 +84,8 @@
 
                     for (int i = 0; i < MessageCount; i++)
                     {
-                        socket.SendBytes(msg, 0, msg.Length);
+                        ZError error;
+                        socket.SendBytes(msg, 0, msg.Length, ZSocketFlags.None, out error);
                     }
                 }
             }

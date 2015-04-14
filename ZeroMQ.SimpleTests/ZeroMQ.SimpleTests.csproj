@@ -91,7 +91,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="ZeroMQ">
-      <HintPath>..\..\..\clrzmq4\bin\Debug\ZeroMQ.dll</HintPath>
+      <HintPath>..\..\clrzmq4\bin\Release\ZeroMQ.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
